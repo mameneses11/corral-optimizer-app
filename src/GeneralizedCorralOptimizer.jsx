@@ -262,7 +262,7 @@ const GeneralizedCorralOptimizer = () => {
 
               <div className="p-4 bg-white rounded-lg shadow-sm border border-slate-200">
                 <span className="text-xs text-slate-500">Función de Área</span>
-                <p className="font-mono text-sm text-indigo-600">A(x) = x(P - (N+1)x) = Px - (N+1)x^2</p>
+                <p className="font-mono text-sm text-indigo-600">A(x) = x(P - (N+1)x) = Px - (N+1)x²</p>
               </div>
 
               <p className="text-sm text-slate-700 pt-2">Para encontrar el máximo, derivamos A(x) y la igualamos a cero:</p>
@@ -287,7 +287,7 @@ const GeneralizedCorralOptimizer = () => {
 
               <div className="p-4 bg-teal-50 border border-teal-200 rounded text-center mt-4">
                 <span className="text-xs text-teal-800 font-semibold uppercase">Fórmula del Área Máxima</span>
-                <p className="font-mono text-lg font-bold text-teal-900">A = (P^2) / (4(N+1))</p>
+                <p className="font-mono text-lg font-bold text-teal-900">A = (P²) / (4(N+1))</p>
               </div>
             </div>
           </div>
