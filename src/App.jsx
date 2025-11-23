@@ -1,10 +1,10 @@
 import React from 'react';
-import GeneralizedCorralOptimizer from './GeneralizedCorralOptimizer.jsx';
+import CorralOptimizer from './CorralOptimizer.jsx';
 
 function App() {
     return (
         <div className="p-4 md:p-10">
-            <GeneralizedCorralOptimizer />
+            <CorralOptimizer />
         </div>
     );
 }
