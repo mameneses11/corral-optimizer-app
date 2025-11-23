@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceDot, Area } from 'recharts';
 import { BookCopy, Ruler, TrendingUp, Anchor, SquareSplitVertical } from 'lucide-react';
+import Latex from 'react-latex-next';
 
 const CorralOptimizer = () => {
   const [numCorrals, setNumCorrals] = useState(1);
@@ -83,10 +84,10 @@ const CorralOptimizer = () => {
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-slate-800 flex items-center justify-center gap-3">
             <BookCopy className="w-8 h-8 text-teal-600" />
-            Optimizador General de Corrales
+            Optimizador de Corrales
           </h1>
           <p className="text-slate-600 mt-2">
-            Tienes <strong>{totalFence} yardas</strong> de cerca. Elige cuántos corrales (N) quieres construir.
+            Tienes <strong>{totalFence} yardas</strong> de cerca. Elige cuántos corrales (<Latex>$N$</Latex>) quieres construir.
           </p>
         </div>
 
@@ -94,7 +95,7 @@ const CorralOptimizer = () => {
           <div className="space-y-6">
             <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
               <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center justify-between">
-                <span>Número de Corrales (N): <span className="text-teal-600 font-bold text-lg">{numCorrals}</span></span>
+                <span>Número de Corrales (<Latex>$N$</Latex>): <span className="text-teal-600 font-bold text-lg">{numCorrals}</span></span>
                 <span className="text-xs text-slate-400">Total Vallas Verticales: {verticalFences}</span>
               </label>
               <input
@@ -110,8 +111,8 @@ const CorralOptimizer = () => {
 
             <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
               <label className="block text-sm font-medium text-slate-700 mb-2 flex items-center justify-between">
-                <span>Ancho de cada sección (x): <span className="text-teal-600 font-bold text-lg">{width.toFixed(1)} yd</span></span>
-                <span className="text-xs text-slate-400">Máx: {maxValidWidth.toFixed(1)} yd</span>
+                <span>Ancho de cada sección (<Latex>$x$</Latex>): <span className="text-teal-600 font-bold text-lg">{width.toFixed(1)} <Latex>$yd$</Latex></span></span>
+                <span className="text-xs text-slate-400">Máx: {maxValidWidth.toFixed(1)} <Latex>$yd$</Latex></span>
               </label>
               <input
                 type="range"
@@ -127,10 +128,10 @@ const CorralOptimizer = () => {
                 <div className="p-4 bg-teal-50 rounded-lg border border-teal-100">
                   <div className="flex items-center gap-2 text-teal-800 mb-1">
                     <Ruler size={18} />
-                    <span className="font-semibold">Largo Total (y)</span>
+                    <span className="font-semibold">Largo Total (<Latex>$y$</Latex>)</span>
                   </div>
-                  <div className="text-2xl font-bold text-teal-900">{length.toFixed(1)} yd</div>
-                  <div className="text-xs text-teal-600 mt-1">240 - {verticalFences}x</div>
+                  <div className="text-2xl font-bold text-teal-900">{length.toFixed(1)} <Latex>$yd$</Latex></div>
+                  <div className="text-xs text-teal-600 mt-1"><Latex>$240 - {verticalFences}x$</Latex></div>
                 </div>
 
                 <div className={`p-4 rounded-lg border transition-all duration-300 ${Math.abs(totalArea - maxArea) < 0.1 ? 'bg-green-100 border-green-300 ring-2 ring-green-400' : 'bg-amber-50 border-amber-100'}`}>
@@ -139,7 +140,7 @@ const CorralOptimizer = () => {
                     <span className="font-semibold">Área Total</span>
                   </div>
                   <div className={`text-2xl font-bold ${Math.abs(totalArea - maxArea) < 0.1 ? 'text-green-900' : 'text-amber-900'}`}>
-                    {totalArea.toLocaleString(undefined, {maximumFractionDigits: 0})} yd²
+                    {totalArea.toLocaleString(undefined, {maximumFractionDigits: 0})} <Latex>$yd^2$</Latex>
                   </div>
                   {Math.abs(totalArea - maxArea) < 0.1 && (
                     <div className="text-xs text-green-700 font-bold mt-1">¡MÁXIMO ALCANZADO!</div>
@@ -149,7 +150,7 @@ const CorralOptimizer = () => {
             </div>
 
             <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-200 h-64">
-              <h3 className="text-sm font-semibold text-slate-500 mb-4 text-center">Área vs. Ancho (x) para N={numCorrals}</h3>
+              <h3 className="text-sm font-semibold text-slate-500 mb-4 text-center">Área vs. Ancho (<Latex>$x$</Latex>) para N={numCorrals}</h3>
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={chartData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
@@ -232,8 +233,8 @@ const CorralOptimizer = () => {
           <h4 className="font-bold mb-4 text-lg text-slate-700 text-center">Tabla de Resultados Óptimos</h4>
           <div className="flex justify-center">
             <div className="text-center bg-teal-50 text-teal-800 p-4 rounded-lg border-l-4 border-teal-500">
-              <h5 className="font-bold text-xl">¡El Largo (y) Óptimo es Siempre {optimalLength} yardas!</h5>
-              <p className="text-sm">La mitad de la cerca (120 yd) se usa para el lado largo. La otra mitad (120 yd) se divide entre las {verticalFences} vallas verticales (x).</p>
+              <h5 className="font-bold text-xl">¡El Largo (<Latex>$y$</Latex>) Óptimo es Siempre {optimalLength} yardas!</h5>
+              <p className="text-sm">La mitad de la cerca (120 <Latex>$yd$</Latex>) se usa para el lado largo. La otra mitad (120 <Latex>$yd$</Latex>) se divide entre las {verticalFences} vallas verticales (<Latex>$x$</Latex>).</p>
             </div>
           </div>
 
@@ -241,10 +242,10 @@ const CorralOptimizer = () => {
             <table className="min-w-full divide-y divide-slate-200">
               <thead className="bg-slate-100">
               <tr>
-                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase">Corrales (N)</th>
-                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase">Vallas Vert. (N+1)</th>
-                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase">Ancho Óptimo (x)</th>
-                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase">Largo Óptimo (y)</th>
+                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase">Corrales (<Latex>$N$</Latex>)</th>
+                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase">Vallas Vert. (<Latex>$N+1$</Latex>)</th>
+                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase">Ancho Óptimo (<Latex>$x$</Latex>)</th>
+                <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase">Largo Óptimo (<Latex>$y$</Latex>)</th>
                 <th className="px-4 py-2 text-left text-xs font-medium text-slate-500 uppercase">Área Máxima</th>
               </tr>
               </thead>
@@ -266,44 +267,44 @@ const CorralOptimizer = () => {
           </div>
 
           <div className="mt-10 border-t border-slate-200 pt-8">
-            <h4 className="font-bold mb-4 text-xl text-slate-800 text-center">Generalización Matemática (para cualquier Cerca P)</h4>
+            <h4 className="font-bold mb-4 text-xl text-slate-800 text-center">Generalización Matemática (para cualquier Cerca <Latex>$P$</Latex>)</h4>
             <div className="flex flex-col lg:flex-row gap-8 items-start bg-slate-100 p-6 rounded-lg">
               <div className="flex-1 space-y-3">
                 <p className="text-sm text-slate-700">Si P es la longitud total de la cerca y N es el número de corrales, las fórmulas generales son:</p>
 
                 <div className="p-4 bg-white rounded-lg shadow-sm border border-slate-200">
                   <span className="text-xs text-slate-500">Restricción (Cerca)</span>
-                  <p className="font-mono text-sm text-indigo-600">P = (N+1)x + y</p>
+                  <p className="font-mono text-sm text-indigo-600"><Latex>$P = (N+1)x + y$</Latex></p>
                 </div>
 
                 <div className="p-4 bg-white rounded-lg shadow-sm border border-slate-200">
                   <span className="text-xs text-slate-500">Función de Área</span>
-                  <p className="font-mono text-sm text-indigo-600">A(x) = x(P - (N+1)x) = Px - (N+1)x²</p>
+                  <p className="font-mono text-sm text-indigo-600"><Latex>$A(x) = x(P - (N+1)x) = Px - (N+1)x^2$</Latex></p>
                 </div>
 
-                <p className="text-sm text-slate-700 pt-2">Para encontrar el máximo, derivamos A(x) y la igualamos a cero:</p>
+                <p className="text-sm text-slate-700 pt-2">Para encontrar el máximo, derivamos <Latex>$A(x)$</Latex> y la igualamos a cero:</p>
 
                 <div className="p-4 bg-white rounded-lg shadow-sm border border-slate-200">
                   <span className="text-xs text-slate-500">Derivada</span>
-                  <p className="font-mono text-sm text-indigo-600">A'(x) = P - 2(N+1)x = 0</p>
+                  <p className="font-mono text-sm text-indigo-600"><Latex>$A'(x) = P - 2(N+1)x = 0$</Latex></p>
                 </div>
 
                 <div className="p-4 bg-blue-50 border border-blue-200 rounded text-center">
-                  <span className="text-xs text-blue-800 font-semibold uppercase">Ancho Óptimo (w)</span>
-                  <p className="font-mono text-lg font-bold text-blue-900">w = P / (2(N+1))</p>
+                  <span className="text-xs text-blue-800 font-semibold uppercase">Ancho Óptimo (<Latex>w</Latex>)</span>
+                  <p className="font-mono text-lg font-bold text-blue-900"><Latex>$w = P / (2(N+1))$</Latex></p>
                 </div>
 
                 <p className="text-sm text-slate-700 pt-2">Lo más revelador es encontrar el largo óptimo y usando la mitad de la cerca P:</p>
 
                 <div className="p-4 bg-green-50 border border-green-200 rounded text-center">
-                  <span className="text-xs text-green-800 font-semibold uppercase">Largo Óptimo (l)</span>
-                  <p className="font-mono text-lg font-bold text-green-900">l = P / 2</p>
+                  <span className="text-xs text-green-800 font-semibold uppercase">Largo Óptimo (<Latex>$l$</Latex>)</span>
+                  <p className="font-mono text-lg font-bold text-green-900"><Latex>$l = P / 2$</Latex></p>
                   <p className="text-xs text-green-700">(¡Siempre es la mitad de la cerca total, sin importar N!)</p>
                 </div>
 
                 <div className="p-4 bg-teal-50 border border-teal-200 rounded text-center mt-4">
                   <span className="text-xs text-teal-800 font-semibold uppercase">Fórmula del Área Máxima</span>
-                  <p className="font-mono text-lg font-bold text-teal-900">A = (P²) / (4(N+1))</p>
+                  <p className="font-mono text-lg font-bold text-teal-900"><Latex>$A = (P^2) / (4(N+1))$</Latex></p>
                 </div>
               </div>
             </div>
